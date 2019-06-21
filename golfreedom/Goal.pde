@@ -1,0 +1,3 @@
+class Goal{
+  // to do
+}
