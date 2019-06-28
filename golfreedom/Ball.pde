@@ -16,6 +16,22 @@ class Ball{
   color col = color(255);
   
   void move(){
+    if(is_moving){
+      px = x;
+      py = y;
+      sy += g;
+      sx = sx * air_resistance;
+      sy = sy * air_resistance;
+      x += sx;
+      y += sy;
+      if(can_break_criterion <= dist(0, 0, sx, sy)){
+        can_break = true;
+      }else{
+        can_break = false;
+      }
+    }else{
+      can_break = false;
+    }
   }
   
   void display(Stage s){
