@@ -57,9 +57,42 @@ class Ball{
     ellipse(dx, dy, r*2, r*2);
   }
   
-  void miss(Stage s, Block[][] bl, Uphill_45[][] uh, Downhill_45[][] dh, Bumper[][] bp){
+  void update_current_stage(boolean clear, Stage[] s, Block[][] bl, Uphill_45[][] uh, Downhill_45[][] dh, Bumper[][] bp){
+    if(clear){
+      current_stage++;
+      if(s.length <= current_stage){
+        current_stage = 0;
+      }
+      reset(s[current_stage], bl, uh, dh, bp);
+    }
   }
-
+  
+  void miss(Stage s, Block[][] bl, Uphill_45[][] uh, Downhill_45[][] dh, Bumper[][] bp){
+    if(x+r < 0 || s.w < x-r || s.h < y-r){
+      reset(s, bl, uh, dh, bp);
+    }
+  }
+  
+  void reset(Stage s, Block[][] bl, Uphill_45[][] uh, Downhill_45[][] dh, Bumper[][] bp){
+    x = s.initial_x;
+    y = s.initial_y;
+    sx = 0;
+    sy = 0;
+    for(int i=0; i<s.count_block; i++){
+      bl[current_stage][i].exist = true;
+    }
+    for(int i=0; i<s.count_uphill_45; i++){
+      uh[current_stage][i].exist = true;
+    }
+    for(int i=0; i<s.count_downhill_45; i++){
+      dh[current_stage][i].exist = true;
+    }
+    for(int i=0; i<s.count_bumper; i++){
+      bp[current_stage][i].exist = true;
+    }
+    is_moving = true;
+  }
+  
   void hit_corner(int x2, int y2, float rebound){
   }
 }
