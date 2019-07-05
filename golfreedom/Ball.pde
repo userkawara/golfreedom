@@ -35,6 +35,26 @@ class Ball{
   }
   
   void display(Stage s){
+    if(x < width/2){
+      dx = x;
+    }else if(x > s.w - width/2){
+      dx = x - (s.w - width);
+    }else{
+      dx = width/2;
+    }
+    if(y < height/2){
+      dy = y;
+    }else if(y > s.h - height/2){
+      dy = y - (s.h - height);
+    }else{
+      dy = height/2;
+    }
+    if(can_break){
+      fill(255, 255, 0);
+    }else{
+      fill(col);
+    }
+    ellipse(dx, dy, r*2, r*2);
   }
   
   void miss(Stage s, Block[][] bl, Uphill_45[][] uh, Downhill_45[][] dh, Bumper[][] bp){
