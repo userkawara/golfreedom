@@ -2,9 +2,9 @@ class Bumper{
   int x, y, r;
   int dx, dy;
   float power = 15;
-  boolean exist;
-  color col1;
-  color col2;
+  boolean exist = true;
+  color col1 = color(255);
+  color col2 = color(255);
   
   Bumper(int x0, int y0, int r0){
     x=x0;
@@ -17,10 +17,10 @@ class Bumper{
     dy = y - b.y + b.dy;
     if(exist){
       fill(col1);
-      ellipse(dx, dy, r,r);
+      ellipse(dx, dy, 2*r,2*r);
       
       fill(col2);
-      ellipse(dx,dy,r/2,r/2);
+      ellipse(dx,dy,r,r);
     }
   }
   

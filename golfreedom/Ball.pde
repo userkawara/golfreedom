@@ -94,5 +94,12 @@ class Ball{
   }
   
   void hit_corner(int x2, int y2, float rebound){
+    x = px;
+    y = py;
+    float theta0 = atan2(sy, sx);
+    float theta = atan2(y2-y, x2-x) - PI/2;
+    float buf = dist(0, 0, sx, sy);
+    sx = buf * cos(theta - (theta0-theta)) * rebound;
+    sy = buf * sin(theta - (theta0-theta)) * rebound;
   }
 }

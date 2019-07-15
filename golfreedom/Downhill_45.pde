@@ -5,7 +5,7 @@ class Downhill_45{
   float rebound = 0.3;
   float friction = 0.6;
   color col = color(0);
-  boolean exist;
+  boolean exist = true;
   
   Downhill_45(int x0, int y0, int size0){
     x = x0;
@@ -23,61 +23,79 @@ class Downhill_45{
   }
   
   void hit(Ball b){
-    float xh = b.x+b.r*sqrt(2)/2 - x;
-    float yh = b.y+b.r*sqrt(2)/2 - y;
-    
-    if(exist == true){
-    
-      if(0<xh && 0<yh && xh<size && yh<size && yh>xh){
-        hit_oblique_side(b);
-      }
-    
-      if(b.x+b.r >= x && b.x-b.r <= x+size && b.y-b.r <= y+size && b.y-b.r >= y ){
-        hit_lower_side(b);
-      }
-    
-      if(b.x-b.r >= x && y<b.y && b.y < y+size && b.x < x){
-        hit_left_side(b);
-      }
+    if(exist){
+      hit_oblique_side(b);
+      hit_lower_side(b);
+      hit_left_side(b);
+      hit_corner(b);
     }
-    hit_corner(b);
   }
   
   void hit_oblique_side(Ball b){
-    b.x = b.bx;
-    b.y = b.by;
-    float buf = b.sx;
-    b.sx = -abs(b.sy) * rebound;
-    b.sy = -abs(buf) * friction;
-    exist=false;
+    ball_x2 = b.x-b.r*sqrt(2)/2;
+    ball_y2 = b.y+b.r*sqrt(2)/2;
+    if(x<ball_x2 && y<ball_y2 && ball_x2<x+size && ball_y2<y+size && ball_y2 - y> ball_x2 - x){
+      b.x = b.px;
+      b.y = b.py;
+      float buf = b.sx;
+      b.sx = b.sy * rebound + b.out_loop;
+      b.sy = buf * rebound;
+      if(b.can_break){
+        exist = false;
+      }
+    }
   }
   
   void hit_lower_side(Ball b){
-     b.y = b.by;
-     b.sx = -b.sx * rebound;
-     b.sy = b.sy * friction;
-     exist=false;
+    if ((b.y - b.r) <= y+size && x < b.x && b.x < x+size && y+size < b.y){
+      b.y = b.py;
+      b.sy = -b.sy * rebound;
+      b.sx = b.sx * friction;
+      if(b.can_break){
+        exist = false;
+      }
+    }
   }
   
   void hit_left_side(Ball b){
-     b.y = b.by;
-     b.sx = -b.sx * rebound;
-     b.sy = b.sy * friction;
-     exist=false;
+    if ((b.x + b.r) >= x && y < b.y&& b.y < y+size && b.x < x){
+      b.x = b.px;
+      b.sx = -b.sx * rebound;
+      b.sy = b.sy * friction;
+      if(b.can_break){
+        exist = false;
+      }
+    }
   }
   
   void hit_corner(Ball b){
-    // upper corner
-    if(sqrt((b.x-x)*(b.x-x)+(b.y-y)*(b.y-y))<=b.r){
-      b.hit_corner(x,y);
+    if(dist(b.x, b.y, x, y) < b.r){
+      b.hit_corner(x, y, rebound);
+      if(b.x < x){
+        b.sx -= b.out_loop;
+      }else{
+        b.sx += b.out_loop;
+      }
+      if(b.can_break){
+        exist = false;
+      }
+      return;
     }
-    // left corner
-    if(sqrt((b.x-x)*(b.x-x)+(b.y-y+size)*(b.y-y+size))==b.r){
-      b.hit_corner(x,y+size);
+    if(dist(b.x, b.y, x, y+size) < b.r){
+      b.hit_corner(x, y+size, rebound);
+      b.sx -= b.out_loop;
+      if(b.can_break){
+        exist = false;
+      }
+      return;
     }
-    // right corner
-    if(sqrt((b.x-x+size)*(b.x-x+size)+(b.y-y+size)*(b.y-y+size))==b.r){
-      b.hit_corner(x+size,y+size);
+    if(dist(b.x, b.y, x+size, y+size) < b.r){
+      b.hit_corner(x+size, y+size, rebound);
+      b.sx += b.out_loop;
+      if(b.can_break){
+        exist = false;
+      }
+      return;
     }
   }
 }
