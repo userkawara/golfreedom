@@ -15,7 +15,7 @@ void setup(){
 }
 
 void draw(){
-  background(255);
+  background(s[b.current_stage].bg(b, gl[b.current_stage]));
   gl[b.current_stage].display(b);
   for(int i=0; i<s[b.current_stage].count_block; i++){
     bl[b.current_stage][i].display(b);
