@@ -15,5 +15,6 @@ void mouseReleased(){
     b.sy = shot_power * sin(theta + PI);
     b.pressed = false;
     b.is_moving = true;
+    b.len -= 30;
   }
 }

@@ -16,6 +16,7 @@ class Bumper{
     dx = x - b.x + b.dx;
     dy = y - b.y + b.dy;
     if(exist){
+      stroke(0);
       fill(col1);
       ellipse(dx, dy, 2*r,2*r);
       

@@ -18,6 +18,7 @@ class Downhill_45{
     dx = x - b.x + b.dx;
     dy = y - b.y + b.dy;
     if(exist == true){
+      stroke(0);
       triangle(dx, dy, dx, dy+size, dx+size, dy+size);
     }
   }

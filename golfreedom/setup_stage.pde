@@ -27,4 +27,38 @@ void setup_stage(){
   bp[0][0]  = new Bumper(2225, 525, 75);
   gl[0] = new Goal(3300, 550);
   
+  /*===Stage 2===*/
+  s[1] = new Stage(650, 1500, 1000, 2000,17, 4, 4, 6);
+  bl[1][0]  = new Block(  0,   0,1000,  50);
+  bl[1][1]  = new Block(  0,  50,  50,1950);
+  bl[1][2]  = new Block(950,  50,  50,1950);
+  bl[1][3]  = new Block(200,1800, 200,  50);
+  bl[1][4]  = new Block(600,1800, 200,  50);
+  bl[1][5]  = new Block(200,1700,  50, 100);
+  bl[1][6]  = new Block(750,1700,  50, 100);
+  bl[1][7]  = new Block( 50,1500, 100,  50);
+  bl[1][8]  = new Block(850,1500, 100,  50);
+  bl[1][9]  = new Block(300,1300, 400,  50);
+  bl[1][10] = new Block(425, 850, 150,  50);
+  bl[1][11] = new Block(250, 700, 100,  50);
+  bl[1][12] = new Block(650, 700, 100,  50);
+  bl[1][13] = new Block( 50, 550, 100,  50);
+  bl[1][14] = new Block(850, 550, 100,  50);
+  bl[1][15] = new Block(400, 400, 200,  50);
+  bl[1][16] = new Block(450,1350, 100, 125);
+  uh[1][0]  = new Uphill_45(550,1800,  50);
+  uh[1][1]  = new Uphill_45(200,1650,  50);
+  uh[1][2]  = new Uphill_45(300,1200, 100);
+  uh[1][3]  = new Uphill_45(400, 350,  50);
+  dh[1][0]  = new Downhill_45(400,1800,  50);
+  dh[1][1]  = new Downhill_45(750,1650,  50);
+  dh[1][2]  = new Downhill_45(600,1200, 100);
+  dh[1][3]  = new Downhill_45(550, 350,  50);
+  bp[1][0]  = new Bumper(  75, 1925, 50);
+  bp[1][1]  = new Bumper( 925, 1925, 50);
+  bp[1][2]  = new Bumper(  50, 1000,100);
+  bp[1][3]  = new Bumper( 950, 1000,100);
+  bp[1][4]  = new Bumper(  50,   50, 50);
+  bp[1][5]  = new Bumper( 950,   50, 50);
+  gl[1] = new Goal(450, 300);
 }

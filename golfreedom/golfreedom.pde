@@ -1,10 +1,10 @@
 Ball b;
-Stage[] s          = new       Stage[1];
-Block[][] bl       = new       Block[1][30];
-Uphill_45[][] uh   = new   Uphill_45[1][15];
-Downhill_45[][] dh = new Downhill_45[1][15];
-Bumper[][] bp      = new      Bumper[1][10];
-Goal[] gl          = new        Goal[1];
+Stage[] s          = new       Stage[2];
+Block[][] bl       = new       Block[2][20];
+Uphill_45[][] uh   = new   Uphill_45[2][10];
+Downhill_45[][] dh = new Downhill_45[2][10];
+Bumper[][] bp      = new      Bumper[2][10];
+Goal[] gl          = new        Goal[2];
 
 void setup(){
   size(1000, 500);
@@ -37,4 +37,5 @@ void draw(){
   b.update_current_stage(gl[b.current_stage].clear(b), s, bl, uh, dh, bp);
   b.miss(s[b.current_stage], bl, uh, dh, bp);
   b.display(s[b.current_stage]);
+  b.draw_guide();
 }

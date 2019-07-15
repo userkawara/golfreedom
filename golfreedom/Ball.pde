@@ -14,6 +14,7 @@ class Ball{
   boolean is_moving = true;
   boolean pressed = false;
   color col = color(255);
+  int len = 200;
   
   void move(){
     if(is_moving){
@@ -49,12 +50,40 @@ class Ball{
     }else{
       dy = height/2;
     }
-    if(can_break){
-      fill(255, 255, 0);
+    if(pressed){
+      fill(255/max_velocity_of_shot*(max_velocity_of_shot - 0.04* dist(b.dx, b.dy, mouseX, mouseY)));
     }else{
-      fill(col);
+      if(can_break){
+        fill(255, 255, 0);
+      }else{
+        fill(col);
+      }
     }
+    
+    stroke(0);
     ellipse(dx, dy, r*2, r*2);
+  }
+  
+  void draw_guide(){
+    if(pressed){
+      float lx_0 = dx, ly_0 = dy;
+      float lx_1, ly_1;
+      float shot_power = 0.04 * dist(b.dx, b.dy, mouseX, mouseY);
+      float theta = atan2(mouseY - b.dy, mouseX - b.dx);
+      float lsx = shot_power * cos(theta + PI);
+      float lsy = shot_power * sin(theta + PI);
+      for(int i=0; i<len; i++){
+        lsy += g;
+        lsx = lsx * air_resistance;
+        lsy = lsy * air_resistance;
+        lx_1 = int(lx_0 + lsx);
+        ly_1 = int(ly_0 + lsy);
+        stroke(255, 0, 0, 200*(len-i)/len);
+        line(lx_0, ly_0, lx_1, ly_1);
+        lx_0 = lx_1;
+        ly_0 = ly_1;
+      }
+    }
   }
   
   void update_current_stage(boolean clear, Stage[] s, Block[][] bl, Uphill_45[][] uh, Downhill_45[][] dh, Bumper[][] bp){
@@ -78,6 +107,7 @@ class Ball{
     y = s.initial_y;
     sx = 0;
     sy = 0;
+    len = 200;
     for(int i=0; i<s.count_block; i++){
       bl[current_stage][i].exist = true;
       bl[current_stage][i].col = random_color();

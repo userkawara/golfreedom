@@ -18,6 +18,7 @@ class Block{
     dx = x - b.x + b.dx;
     dy = y - b.y + b.dy;
     if(exist){
+      stroke(0);
     rect(dx, dy, w, h);
     }
   }
