@@ -80,15 +80,20 @@ class Ball{
     sy = 0;
     for(int i=0; i<s.count_block; i++){
       bl[current_stage][i].exist = true;
+      bl[current_stage][i].col = random_color();
     }
     for(int i=0; i<s.count_uphill_45; i++){
       uh[current_stage][i].exist = true;
+      uh[current_stage][i].col = random_color();
     }
     for(int i=0; i<s.count_downhill_45; i++){
       dh[current_stage][i].exist = true;
+      dh[current_stage][i].col = random_color();
     }
     for(int i=0; i<s.count_bumper; i++){
       bp[current_stage][i].exist = true;
+      bp[current_stage][i].col1 = random_color();
+      bp[current_stage][i].col2 = random_color();
     }
     is_moving = true;
   }

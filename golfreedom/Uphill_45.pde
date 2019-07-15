@@ -4,7 +4,7 @@ class Uphill_45{
   int dx, dy;
   float rebound = 0.3;
   float friction = 0.6;
-  color col = color(0);
+  color col = random_color();
   boolean exist = true;
   
   Uphill_45(int x0, int y0, int size0){

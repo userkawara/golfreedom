@@ -3,8 +3,8 @@ class Bumper{
   int dx, dy;
   float power = 15;
   boolean exist = true;
-  color col1 = color(255);
-  color col2 = color(255);
+  color col1 = random_color();
+  color col2 = random_color();
   
   Bumper(int x0, int y0, int r0){
     x=x0;

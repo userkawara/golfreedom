@@ -3,7 +3,7 @@ class Block{
   int dx, dy;
   float rebound = 0.3;
   float friction = 0.6;
-  color col = color(255);
+  color col = random_color();
   boolean exist = true;
   
   Block(int x0, int y0, int w0, int h0){
