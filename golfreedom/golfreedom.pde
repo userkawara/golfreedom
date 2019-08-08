@@ -7,7 +7,7 @@ Bumper[][] bp      = new      Bumper[2][10];
 Goal[] gl          = new        Goal[2];
 
 void setup(){
-  size(1000, 500);
+  size(1000, 750);
   b = new Ball();
   setup_stage();
   b.x = s[b.current_stage].initial_x;
